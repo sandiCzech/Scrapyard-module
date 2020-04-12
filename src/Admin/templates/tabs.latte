@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs" id="myTab">
+	{if $template->checkPermissions($user, 'admin:Pages')}
+		<li {if $active == "items"}class="active"{/if}><a class="ajax contentTab" n:href="Teacher:default idPage => $idPage">{_'Teachers'}</a></li>
+		<li {if $active == "fields"}class="active"{/if}><a class="ajax contentTab" n:href="Field:default idPage => $idPage">{_'Fields'}</a></li>
+		<li {if $active == "settings"}class="active"{/if}><a class="ajax settingsTab" n:href="Settings:default idPage => $idPage">{_'Settings'}</a></li>
+  
+	  {var t = $basePathModule . "AdminModule/templates/system/boxes.latte"}
+	  {include $t id => $idPage}
+  	{/if}
+  
+</ul>
