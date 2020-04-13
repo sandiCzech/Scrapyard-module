@@ -3,16 +3,16 @@
 	<div class="page-heading">
 		<h1>{$actualPage->getTitle()}</h1>
 
-		{include tabs.latte active => 'items'}
+		{include ../tabs.latte active => 'carBrand'}
 	</div>
 	
 	<br />
 	<div class="buttonWrap">
-		<a class="btn btn-primary ajax" n:href="update idPage => $actualPage->getId()">{_'Add Teacher'}</a>
+		<a class="btn btn-primary ajax" n:href="update idPage => $actualPage->getId()">{_'Přidat značku'}</a>
 	</div>
 
 	<div class="control-group">
-		{control teacherGrid}
+		{control carBrandGrid}
 	</div>
 	
 {/block}

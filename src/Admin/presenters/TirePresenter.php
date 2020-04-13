@@ -17,7 +17,7 @@ use WebCMS\ScrapyardModule\Entity\Tire;
 class TirePresenter extends BasePresenter
 {
     
-    private $car;
+    private $tire;
 
     protected function startup()
     {
@@ -38,6 +38,8 @@ class TirePresenter extends BasePresenter
         
         $this->template->idPage = $idPage;
     }
+
+    
 
     
 }

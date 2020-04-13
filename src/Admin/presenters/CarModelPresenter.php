@@ -8,15 +8,16 @@
 namespace AdminModule\ScrapyardModule;
 
 use Nette\Forms\Form;
-use WebCMS\ScrapyardModule\Entity\CarBrand;
+use WebCMS\ScrapyardModule\Entity\CarModel;
 
 /**
  *
  * @author Jakub Sanda <jakub.sanda@webcook.cz>
  */
-class CarBrandPresenter extends BasePresenter
+class CarModelPresenter extends BasePresenter
 {
     
+    private $carModel;
     private $carBrand;
 
     protected function startup()
@@ -47,6 +48,10 @@ class CarBrandPresenter extends BasePresenter
 
         $grid->addColumnText('name', 'Název')->setSortable()->setFilterText();
 
+        $grid->addColumnText('carBrand', 'Značka auta')->setCustomRender(function($item) {
+          return $item->getCarBrand()->getName();
+        })->setSortable();
+
         $grid->addActionHref("update", 'Upravit', 'update', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn' , 'btn-primary', 'ajax')));
         $grid->addActionHref("delete", 'Smazat', 'delete', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-danger'), 'data-confirm' => 'Are you sure you want to delete this item?'));
 
@@ -57,7 +62,7 @@ class CarBrandPresenter extends BasePresenter
     public function actionUpdate($id, $idPage)
     {
         if ($id) {
-            $this->carBrand = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->find($id);
+            $this->carModel = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\carModel')->find($id);
         }
     }
 
@@ -70,12 +75,12 @@ class CarBrandPresenter extends BasePresenter
     
     public function actionDelete($id){
 
-        $carBrand = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->find($id);
+        $carModel = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\carModel')->find($id);
 
-        $this->em->remove($carBrand);
+        $this->em->remove($carModel);
         $this->em->flush();
         
-        $this->flashMessage('Značka byla odstraněna.', 'success');
+        $this->flashMessage('Model byl smazán.', 'success');
         
         if(!$this->isAjax()){
             $this->forward('default', array(
@@ -91,8 +96,18 @@ class CarBrandPresenter extends BasePresenter
         $form->addText('name', 'Název')
             ->setRequired('Název je povinný.');
 
-        if ($this->carBrand) {
-            $form->setDefaults($this->carBrand->toArray());
+        $brands = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->findAll();
+        $brandsForSelect = array();
+        if ($brands) {
+            foreach ($brands as $brand) {
+                $brandsForSelect[$brand->getId()] = $brand->getName();
+            }
+        }
+
+        $form->addSelect('carBrand', 'Značka')->setItems($brandsForSelect);
+
+        if ($this->carModel) {
+            $form->setDefaults($this->carModel->toArray());
         }
 
         $form->addSubmit('save', 'Uložit');
@@ -106,16 +121,18 @@ class CarBrandPresenter extends BasePresenter
     {
         $values = $form->getValues();
 
-        if (!$this->carBrand) {
-            $this->carBrand = new CarBrand;
-            $this->em->persist($this->carBrand);
+        if (!$this->carModel) {
+            $this->carModel = new carModel;
+            $this->em->persist($this->carModel);
         }
 
-        $this->carBrand->setName($values->name);
+        $this->carModel->setName($values->name);
+        $carBrand = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->find($values->carBrand);
+        $this->carModel->setCarBrand($carBrand);
 
         $this->em->flush();
 
-        $this->flashMessage('Značka byla uložena.', 'success');
+        $this->flashMessage('Model byl uložen.', 'success');
 
         $this->forward('default', array(
             'idPage' => $this->actualPage->getId()

@@ -19,6 +19,8 @@ class CarPresenter extends BasePresenter
     
     private $car;
 
+    private $carBrand;
+
     protected function startup()
     {
     	parent::startup();
@@ -37,6 +39,22 @@ class CarPresenter extends BasePresenter
         $this->reloadContent();
         
         $this->template->idPage = $idPage;
+    }
+
+    protected function createComponentCarGrid($name)
+    {
+        $grid = $this->createGrid($this, $name, "\WebCMS\ScrapyardModule\Entity\Car");
+
+        $grid->addColumnText('name', 'Název')->setSortable();
+
+        $grid->addColumnText('carBrand', 'Značka auta')->setCustomRender(function($item) {
+            return $item->getCarBrand()->getName();
+        })->setSortable();
+
+        $grid->addActionHref("update", 'Upravit', 'update', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-primary', 'ajax')));
+        $grid->addActionHref("delete", 'Smazat', 'delete', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-danger') , 'data-confirm' => 'Are you sure you want to delete this item?'));
+
+        return $grid;
     }
 
     

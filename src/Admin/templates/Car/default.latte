@@ -1,0 +1,18 @@
+{block content}
+	
+	<div class="page-heading">
+		<h1>{$actualPage->getTitle()}</h1>
+
+		{include ../tabs.latte active => 'car'}
+	</div>
+	
+	<br />
+	<div class="buttonWrap">
+		<a class="btn btn-primary ajax" n:href="update idPage => $actualPage->getId()">{_'Přidat auto'}</a>
+	</div>
+
+	<div class="control-group">
+		{control carGrid}
+	</div>
+	
+{/block}
