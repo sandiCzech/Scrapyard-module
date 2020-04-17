@@ -40,9 +40,9 @@ class CarModelPresenter extends BasePresenter
         $this->template->idPage = $idPage;
     }
 
-    protected function createComponentCarBrandGrid($name)
+    protected function createComponentCarModelGrid($name)
     {
-        $grid = $this->createGrid($this, $name, "\WebCMS\ScrapyardModule\Entity\CarBrand", null, array());
+        $grid = $this->createGrid($this, $name, "\WebCMS\ScrapyardModule\Entity\CarModel", null, array());
 
         $grid->setFilterRenderType(\Grido\Components\Filters\Filter::RENDER_INNER);
 
@@ -62,7 +62,7 @@ class CarModelPresenter extends BasePresenter
     public function actionUpdate($id, $idPage)
     {
         if ($id) {
-            $this->carModel = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\carModel')->find($id);
+            $this->carModel = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarModel')->find($id);
         }
     }
 
@@ -75,7 +75,7 @@ class CarModelPresenter extends BasePresenter
     
     public function actionDelete($id){
 
-        $carModel = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\carModel')->find($id);
+        $carModel = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarModel')->find($id);
 
         $this->em->remove($carModel);
         $this->em->flush();
@@ -122,7 +122,7 @@ class CarModelPresenter extends BasePresenter
         $values = $form->getValues();
 
         if (!$this->carModel) {
-            $this->carModel = new carModel;
+            $this->carModel = new CarModel;
             $this->em->persist($this->carModel);
         }
 

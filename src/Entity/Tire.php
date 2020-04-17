@@ -19,12 +19,12 @@ class Tire extends \WebCMS\Entity\Entity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $tireName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $size;
+    private $tireSize;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -38,7 +38,7 @@ class Tire extends \WebCMS\Entity\Entity
     private $carBrand;
 
     /**
-     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $price;
     
@@ -59,11 +59,6 @@ class Tire extends \WebCMS\Entity\Entity
     private $sold;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $top;
-
-    /**
      * @orm\Column(type="text", nullable=true)
      */
     private $text;
@@ -71,37 +66,15 @@ class Tire extends \WebCMS\Entity\Entity
     public function __construct()
     {
         $this->hide = false;
-        $this->top = false;
         $this->sold = false;
-    }
-
-
-    /**
-     * Get the value of name
-     */ 
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
      * Get the value of size
      */ 
-    public function getSize()
+    public function getTireSize()
     {
-        return $this->size;
+        return $this->tireSize;
     }
 
     /**
@@ -109,9 +82,9 @@ class Tire extends \WebCMS\Entity\Entity
      *
      * @return  self
      */ 
-    public function setSize($size)
+    public function setTireSize($tireSize)
     {
-        $this->size = $size;
+        $this->tireSize = $tireSize;
 
         return $this;
     }
@@ -221,26 +194,6 @@ class Tire extends \WebCMS\Entity\Entity
     }
 
     /**
-     * Get the value of top
-     */ 
-    public function getTop()
-    {
-        return $this->top;
-    }
-
-    /**
-     * Set the value of top
-     *
-     * @return  self
-     */ 
-    public function setTop($top)
-    {
-        $this->top = $top;
-
-        return $this;
-    }
-
-    /**
      * Get the value of text
      */ 
     public function getText()
@@ -276,6 +229,26 @@ class Tire extends \WebCMS\Entity\Entity
     public function setCarBrand($carBrand)
     {
         $this->carBrand = $carBrand;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of tireName
+     */ 
+    public function getTireName()
+    {
+        return $this->tireName;
+    }
+
+    /**
+     * Set the value of tireName
+     *
+     * @return  self
+     */ 
+    public function setTireName($tireName)
+    {
+        $this->tireName = $tireName;
 
         return $this;
     }

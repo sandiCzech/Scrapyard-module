@@ -1,9 +1,9 @@
 {block content}
 
 	<div class="page-heading">	
-		<h1>{_'Přidat/upravit auto'}</h1>
+		<h1>{_'Přidat/upravit pneu'}</h1>
 
-    {include ../tabs.latte active => 'car'}
+    {include ../tabs.latte active => 'tire'}
 	</div>
 
 	<div class="control-group">
@@ -17,8 +17,13 @@
 			<div class="col-md-6">
 
 				<div class="form-group">
-					{label carName /}
-					{input carName class => 'form-control'}
+					{label tireName /}
+					{input tireName class => 'form-control'}
+        </div>
+
+        <div class="form-group">
+					{label size /}
+					{input size class => 'form-control'}
         </div>
 
         <div class="form-group">
@@ -27,28 +32,13 @@
 		    </div>
 
         <div class="form-group">
-          {label carModel /}
-          {input carModel class => 'form-control'}
+          {label price /}
+          {input price class => 'form-control'}
 		    </div>
 
         <div class="form-group">
-					{label year /}
-					{input year class => 'form-control'}
-        </div>
-
-        <div class="form-group">
-					{label engine /}
-					{input engine class => 'form-control'}
-        </div>
-
-        <div class="form-group">
-					{label engineCode /}
-					{input engineCode class => 'form-control'}
-        </div>
-
-        <div class="form-group">
-					{label fuel /}
-					{input fuel class => 'form-control'}
+					{label condition /}
+					{input condition class => 'form-control'}
         </div>
 
         <div class="form-group">
@@ -68,8 +58,8 @@
         <br /><br />
         
         <div class="well row" id="pictures">
-          {if !empty($car)}
-            {foreach $car->getPhotos() as $photo}
+          {if !empty($tire)}
+            {foreach $tire->getPhotos() as $photo}
               <div class="col-md-3 jq_fileBox">
                 <div class="img-thumbnail">
                   <img src="{$basePath}{$photo->getPath()|thumbnail:'system'}" />

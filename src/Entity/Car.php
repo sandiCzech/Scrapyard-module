@@ -19,7 +19,7 @@ class Car extends \WebCMS\Entity\Entity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $carName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -42,12 +42,12 @@ class Car extends \WebCMS\Entity\Entity
     private $engineCode;
 
     /**
-     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $price;
     
     /**
-     * @ORM\OneToMany(targetEntity="PhotoCar", mappedBy="Car") 
+     * @ORM\OneToMany(targetEntity="PhotoCar", mappedBy="car") 
      * @var Array
      */
     private $photos;
@@ -89,9 +89,9 @@ class Car extends \WebCMS\Entity\Entity
     /**
      * Get the value of name
      */ 
-    public function getName()
+    public function getCarName()
     {
-        return $this->name;
+        return $this->carName;
     }
 
     /**
@@ -99,9 +99,9 @@ class Car extends \WebCMS\Entity\Entity
      *
      * @return  self
      */ 
-    public function setName($name)
+    public function setCarName($carName)
     {
-        $this->name = $name;
+        $this->carName = $carName;
 
         return $this;
     }
