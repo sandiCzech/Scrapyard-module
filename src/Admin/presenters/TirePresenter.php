@@ -147,9 +147,9 @@ class TirePresenter extends BasePresenter
         );
 
         $form->addSelect('carBrand', 'Značka')->setItems($brandsForSelect);
-        $form->addSelect('size', 'Velikost')->setItems($sizesForSelect);
+        $form->addSelect('tireSize', 'Velikost')->setItems($sizesForSelect);
         $form->addText('price', 'Cena');
-        $form->addText('condition', 'Stav');
+        $form->addText('tireCondition', 'Stav');
         $form->addTextArea('text', 'Text');
                 
         $form->addCheckbox('hide', 'Schovat');
@@ -185,8 +185,8 @@ class TirePresenter extends BasePresenter
         $this->tire->setTireName($values->tireName);
         $carBrand = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->find($values->carBrand);
         $this->tire->setCarBrand($carBrand);
-        $this->tire->setTireSize($values->size);
-        $this->tire->setCondition($values->condition);
+        $this->tire->setTireSize($values->tireSize);
+        $this->tire->setTireCondition($values->tireCondition);
         $this->tire->setPrice($values->price);
         $this->tire->setText($values->text);
         $this->tire->setHide($values->hide);

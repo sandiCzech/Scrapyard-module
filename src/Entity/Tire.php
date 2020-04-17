@@ -29,24 +29,18 @@ class Tire extends \WebCMS\Entity\Entity
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $condition;
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tireCondition;
 
     /**
      * @ORM\ManyToOne(targetEntity="CarBrand")
      * @ORM\JoinColumn(name="carBrand_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $carBrand;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $price;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="PhotoTire", mappedBy="Tire") 
-     * @var Array
-     */
-    private $photos;
 
     /**
      * @ORM\Column(type="boolean")
@@ -62,6 +56,12 @@ class Tire extends \WebCMS\Entity\Entity
      * @orm\Column(type="text", nullable=true)
      */
     private $text;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="PhotoTire", mappedBy="tire") 
+     * @var Array
+     */
+    private $photos;
 
     public function __construct()
     {
@@ -90,21 +90,41 @@ class Tire extends \WebCMS\Entity\Entity
     }
 
     /**
-     * Get the value of condition
+     * Get the value of tireName
      */ 
-    public function getCondition()
+    public function getTireName()
     {
-        return $this->condition;
+        return $this->tireName;
     }
 
     /**
-     * Set the value of condition
+     * Set the value of tireName
      *
      * @return  self
      */ 
-    public function setCondition($condition)
+    public function setTireName($tireName)
     {
-        $this->condition = $condition;
+        $this->tireName = $tireName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of carBrand
+     */ 
+    public function getCarBrand()
+    {
+        return $this->carBrand;
+    }
+
+    /**
+     * Set the value of carBrand
+     *
+     * @return  self
+     */ 
+    public function setCarBrand($carBrand)
+    {
+        $this->carBrand = $carBrand;
 
         return $this;
     }
@@ -125,30 +145,6 @@ class Tire extends \WebCMS\Entity\Entity
     public function setPrice($price)
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of photos
-     *
-     * @return  Array
-     */ 
-    public function getPhotos()
-    {
-        return $this->photos;
-    }
-
-    /**
-     * Set the value of photos
-     *
-     * @param  Array  $photos
-     *
-     * @return  self
-     */ 
-    public function setPhotos(Array $photos)
-    {
-        $this->photos = $photos;
 
         return $this;
     }
@@ -194,6 +190,26 @@ class Tire extends \WebCMS\Entity\Entity
     }
 
     /**
+     * Get the value of tireCondition
+     */ 
+    public function getTireCondition()
+    {
+        return $this->tireCondition;
+    }
+
+    /**
+     * Set the value of tireCondition
+     *
+     * @return  self
+     */ 
+    public function setTireCondition($tireCondition)
+    {
+        $this->tireCondition = $tireCondition;
+
+        return $this;
+    }
+
+    /**
      * Get the value of text
      */ 
     public function getText()
@@ -214,41 +230,25 @@ class Tire extends \WebCMS\Entity\Entity
     }
 
     /**
-     * Get the value of carBrand
+     * Get the value of photos
+     *
+     * @return  Array
      */ 
-    public function getCarBrand()
+    public function getPhotos()
     {
-        return $this->carBrand;
+        return $this->photos;
     }
 
     /**
-     * Set the value of carBrand
+     * Set the value of photos
+     *
+     * @param  Array  $photos
      *
      * @return  self
      */ 
-    public function setCarBrand($carBrand)
+    public function setPhotos(Array $photos)
     {
-        $this->carBrand = $carBrand;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of tireName
-     */ 
-    public function getTireName()
-    {
-        return $this->tireName;
-    }
-
-    /**
-     * Set the value of tireName
-     *
-     * @return  self
-     */ 
-    public function setTireName($tireName)
-    {
-        $this->tireName = $tireName;
+        $this->photos = $photos;
 
         return $this;
     }
