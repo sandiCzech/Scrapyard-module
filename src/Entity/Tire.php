@@ -63,6 +63,12 @@ class Tire extends \WebCMS\Entity\Entity
      */
     private $photos;
 
+    /**
+     * @gedmo\Slug(fields={"tireName", "id"})
+     * @ORM\Column(length=64)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->hide = false;
@@ -249,6 +255,26 @@ class Tire extends \WebCMS\Entity\Entity
     public function setPhotos(Array $photos)
     {
         $this->photos = $photos;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
 
         return $this;
     }

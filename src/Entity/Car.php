@@ -80,7 +80,7 @@ class Car extends \WebCMS\Entity\Entity
     private $carModel;
 
     /**
-     * @gedmo\Slug(fields={"name", "id"})
+     * @gedmo\Slug(fields={"carName", "id"})
      * @ORM\Column(length=64)
      */
     private $slug;
