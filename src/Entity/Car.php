@@ -79,6 +79,12 @@ class Car extends \WebCMS\Entity\Entity
      */
     private $carModel;
 
+    /**
+     * @gedmo\Slug(fields={"name", "id"})
+     * @ORM\Column(length=64)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->hide = false;
@@ -326,6 +332,26 @@ class Car extends \WebCMS\Entity\Entity
     public function setCarModel($carModel)
     {
         $this->carModel = $carModel;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
 
         return $this;
     }

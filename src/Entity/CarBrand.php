@@ -22,6 +22,12 @@ class CarBrand extends \WebCMS\Entity\Entity
      */
     private $name;
 
+    /**
+     * @gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=64)
+     */
+    private $slug;
+
 
     public function getName()
     {
@@ -31,6 +37,15 @@ class CarBrand extends \WebCMS\Entity\Entity
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    public function setSlug($slug) {
+        $this->slug = $slug;
         return $this;
     }
 
