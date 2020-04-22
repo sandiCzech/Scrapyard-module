@@ -30,7 +30,11 @@ class CarPresenter extends BasePresenter
 
 	private $brands;
 
+	private $brand;
+
 	private $models;
+
+	private $model;
 
 	protected function startup() 
     {
@@ -49,25 +53,50 @@ class CarPresenter extends BasePresenter
 	public function actionDefault($id)
     {	
 		$this->cars = $this->repository->findBy(array(), array('id' => 'DESC'));
-		$this->brands = $this->brandsRepository->findBy(array(), array('id' => 'DESC'));
-		$this->models = $this->modelsRepository->findBy(array(), array('id' => 'DESC'));
+		$this->brands = $this->brandsRepository->findBy(array(), array('name' => 'ASC'));
+		$this->models = $this->modelsRepository->findBy(array(), array('name' => 'ASC'));
 	}
 
 	public function renderDefault($id)
 	{
 
-		$detail = $this->getParameter('parameters');
+		$params = $this->getParameter('parameters');
 
-		if (count($detail) > 0) {
-			$this->car = '';
+		if (count($params) > 0) {
+			if (isset($params[0])) {
+				$this->brand = $this->brandsRepository->findOneBySlug($params[0]);
+				if (!is_object($this->brand)) {
+					$this->redirect('default', array(
+						'path' => $this->actualPage->getPath(),
+						'abbr' => $this->abbr
+					));
+				} else {
+					$this->models = $this->modelsRepository->findBy(array(
+						'carBrand' => $this->brand
+					), array('name' => 'ASC'));
+					$this->template->brand = $this->brand;
 
-			if (!is_object($this->car)) {
-				$this->redirect('default', array(
-					'path' => $this->actualPage->getPath(),
-					'abbr' => $this->abbr
-				));
-			} else {
-				$this->template->car = $this->car;
+					$this->cars = $this->repository->findBy(array(
+						'carBrand' => $this->brand
+					), array('carName' => 'ASC'));
+
+					if (isset($params[1])) {
+						$this->model = $this->modelsRepository->findOneBySlug($params[1]);
+						if (!is_object($this->model)) {
+							$this->redirect('default', array(
+								'path' => $this->actualPage->getPath(),
+								'abbr' => $this->abbr
+							));
+						} else {
+							$this->template->model = $this->model;
+
+							$this->cars = $this->repository->findBy(array(
+								'carBrand' => $this->brand,
+								'carModel' => $this->model
+							), array('carName' => 'ASC'));
+						}
+					}
+				}
 			}
 		}
 
@@ -75,6 +104,12 @@ class CarPresenter extends BasePresenter
 		$this->template->brands = $this->brands;
 		$this->template->models = $this->models;
 		$this->template->id = $id;
+	}
+
+	public function renderShowBrand($id)
+	{
+
+		
 	}
 
 }
