@@ -44,6 +44,11 @@ class Car extends \WebCMS\Entity\Entity
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $bodywork;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $price;
     
     /**
@@ -364,5 +369,25 @@ class Car extends \WebCMS\Entity\Entity
         }
 
         return NULL;
+    }
+
+    /**
+     * Get the value of bodywork
+     */ 
+    public function getBodywork()
+    {
+        return $this->bodywork;
+    }
+
+    /**
+     * Set the value of bodywork
+     *
+     * @return  self
+     */ 
+    public function setBodywork($bodywork)
+    {
+        $this->bodywork = $bodywork;
+
+        return $this;
     }
 }

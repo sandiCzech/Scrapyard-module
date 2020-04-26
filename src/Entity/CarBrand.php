@@ -28,6 +28,15 @@ class CarBrand extends \WebCMS\Entity\Entity
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $top;
+
+    public function __construct()
+    {
+        $this->top = false;
+    }
 
     public function getName()
     {
@@ -50,4 +59,24 @@ class CarBrand extends \WebCMS\Entity\Entity
     }
 
 
+
+    /**
+     * Get the value of top
+     */ 
+    public function getTop()
+    {
+        return $this->top;
+    }
+
+    /**
+     * Set the value of top
+     *
+     * @return  self
+     */ 
+    public function setTop($top)
+    {
+        $this->top = $top;
+
+        return $this;
+    }
 }

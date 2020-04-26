@@ -47,6 +47,14 @@ class CarBrandPresenter extends BasePresenter
 
         $grid->addColumnText('name', 'Název')->setSortable()->setFilterText();
 
+        $grid->addColumnText('top', 'Topovaný')->setCustomRender(function($item) {
+            if ($item->getTop()) {
+                return 'Ano';
+            } else {
+                return 'Ne';
+            }
+        })->setSortable();
+
         $grid->addActionHref("update", 'Upravit', 'update', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn' , 'btn-primary', 'ajax')));
         $grid->addActionHref("delete", 'Smazat', 'delete', array('idPage' => $this->actualPage->getId()))->getElementPrototype()->addAttributes(array('class' => array('btn', 'btn-danger'), 'data-confirm' => 'Are you sure you want to delete this item?'));
 
@@ -91,6 +99,8 @@ class CarBrandPresenter extends BasePresenter
         $form->addText('name', 'Název')
             ->setRequired('Název je povinný.');
 
+        $form->addCheckbox('top', 'Topovaný');
+
         if ($this->carBrand) {
             $form->setDefaults($this->carBrand->toArray());
         }
@@ -112,6 +122,7 @@ class CarBrandPresenter extends BasePresenter
         }
 
         $this->carBrand->setName($values->name);
+        $this->carBrand->setTop($values->top);
 
         $this->em->flush();
 

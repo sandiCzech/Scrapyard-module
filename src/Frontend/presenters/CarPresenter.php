@@ -28,6 +28,8 @@ class CarPresenter extends BasePresenter
 
 	private $car;
 
+	private $topBrands;
+
 	private $brands;
 
 	private $brand;
@@ -53,7 +55,8 @@ class CarPresenter extends BasePresenter
 	public function actionDefault($id)
     {	
 		$this->cars = $this->repository->findBy(array(), array('id' => 'DESC'));
-		$this->brands = $this->brandsRepository->findBy(array(), array('name' => 'ASC'));
+		$this->topBrands = $this->brandsRepository->findBy(array('top' => true), array('name' => 'ASC'));
+		$this->brands = $this->brandsRepository->findBy(array('top' => false), array('name' => 'ASC'));
 		$this->models = $this->modelsRepository->findBy(array(), array('name' => 'ASC'));
 	}
 
@@ -94,6 +97,10 @@ class CarPresenter extends BasePresenter
 								'carBrand' => $this->brand,
 								'carModel' => $this->model
 							), array('carName' => 'ASC'));
+
+							if (isset($params[2])) {
+								$this->car = $this->repository->findOneBySlug($params[2]);
+							}
 						}
 					}
 				}
@@ -101,6 +108,8 @@ class CarPresenter extends BasePresenter
 		}
 
 		$this->template->cars = $this->cars;
+		$this->template->car = $this->car;
+		$this->template->topBrands = $this->topBrands;
 		$this->template->brands = $this->brands;
 		$this->template->models = $this->models;
 		$this->template->id = $id;
