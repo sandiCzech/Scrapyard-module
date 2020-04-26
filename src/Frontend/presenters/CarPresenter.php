@@ -115,10 +115,4 @@ class CarPresenter extends BasePresenter
 		$this->template->id = $id;
 	}
 
-	public function renderShowBrand($id)
-	{
-
-		
-	}
-
 }

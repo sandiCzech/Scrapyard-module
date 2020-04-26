@@ -278,4 +278,14 @@ class Tire extends \WebCMS\Entity\Entity
 
         return $this;
     }
+
+    public function getDefaultPhoto(){
+        foreach($this->getPhotos() as $photo){
+            if($photo->getMain()){
+                return $photo;
+            }
+        }
+
+        return NULL;
+    }
 }
