@@ -150,7 +150,7 @@ class TirePresenter extends BasePresenter
         $form->addSelect('tireSize', 'Velikost')->setItems($sizesForSelect);
         $form->addText('price', 'Cena');
         $form->addText('tireCondition', 'Stav');
-        $form->addTextArea('text', 'Text');
+        $form->addTextArea('text', 'Text')->setAttribute('class', 'form-control editor');
                 
         $form->addCheckbox('hide', 'Schovat');
 

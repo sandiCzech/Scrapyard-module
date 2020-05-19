@@ -153,7 +153,7 @@ class CarPresenter extends BasePresenter
         $form->addText('engineCode', 'Kódové označení ');
         $form->addText('fuel', 'Palivo');
         $form->addText('bodywork', 'Karoserie');
-        $form->addTextArea('text', 'Text');
+        $form->addTextArea('text', 'Text')->setAttribute('class', 'form-control editor');
                 
         $form->addCheckbox('hide', 'Schovat');
 
