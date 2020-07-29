@@ -81,7 +81,9 @@ class CarPresenter extends BasePresenter
 
 					$this->cars = $this->repository->findBy(array(
 						'carBrand' => $this->brand
-					), array('carName' => 'ASC'));
+          ), array('carName' => 'ASC'));
+          
+          $this->template->seoTitle = $this->brand->getName().' – Autovrakoviště Vik';
 
 					if (isset($params[1])) {
 						$this->model = $this->modelsRepository->findOneBySlug($params[1]);
@@ -96,10 +98,13 @@ class CarPresenter extends BasePresenter
 							$this->cars = $this->repository->findBy(array(
 								'carBrand' => $this->brand,
 								'carModel' => $this->model
-							), array('carName' => 'ASC'));
+              ), array('carName' => 'ASC'));
+              
+              $this->template->seoTitle = $this->brand->getName().' '.$this->model->getName().' – Autovrakoviště Vik';
 
 							if (isset($params[2])) {
-								$this->car = $this->repository->findOneBySlug($params[2]);
+                $this->car = $this->repository->findOneBySlug($params[2]);
+                $this->template->seoTitle = $this->car->getCarName().' – Autovrakoviště Vik';
 							}
 						}
 					}
