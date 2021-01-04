@@ -33,9 +33,15 @@ class CarBrand extends \WebCMS\Entity\Entity
      */
     private $top;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $alu;
+
     public function __construct()
     {
         $this->top = false;
+        $this->alu = false;
     }
 
     public function getName()
@@ -79,4 +85,27 @@ class CarBrand extends \WebCMS\Entity\Entity
 
         return $this;
     }
+
+
+    /**
+     * Get the value of alu
+     */ 
+    public function getAlu()
+    {
+        return $this->alu;
+    }
+
+    /**
+     * Set the value of alu
+     *
+     * @return  self
+     */ 
+    public function setAlu($alu)
+    {
+        $this->alu = $alu;
+
+        return $this;
+    }
+
+
 }
