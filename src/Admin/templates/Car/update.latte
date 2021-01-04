@@ -29,7 +29,15 @@
         <div class="form-group">
           {label carModel /}
           {input carModel class => 'form-control'}
-		    </div>
+        </div>
+        
+        <div class="form-group">
+          {if $modelyAut}
+          {foreach $modelyAut as $model}
+          <p class="hidden js-model" data-brand="{$model->getCarBrand()->getId()}">{$model->getName()}</p>
+          {/foreach}
+          {/if}
+        </div>
 
         <div class="form-group">
 					{label year /}
@@ -99,6 +107,46 @@
 		</div>
 
 
-	{/form}
+  {/form}
+
+  <style>
+    #frmform-carModel option {
+      display: none;
+    }
+    #frmform-carModel option.is-active {
+      display: block;
+    }
+  </style>
+  
+  <script>
+    // hacks
+    $(function() {
+      var carModels = [];
+      
+      $('.js-model[data-brand="2"]').each(function() {
+        carModels.push($(this).text());
+      });
+
+      $.each(carModels, function( index, value ) {
+        $('#frmform-carModel').find('option:contains('+value+')').addClass('is-active');
+      });
+
+
+
+      $("#frmform-carBrand").change(function() {
+        $('#frmform-carModel option').removeClass('is-active');
+
+        var carModels = [];
+        
+        $('.js-model[data-brand="'+$(this).val()+'"]').each(function() {
+          carModels.push($(this).text());
+        });
+
+        $.each(carModels, function( index, value ) {
+          $('#frmform-carModel').find('option:contains('+value+')').addClass('is-active');
+        });
+      });
+    });
+  </script>
 
 {/block}
