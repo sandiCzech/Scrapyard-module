@@ -56,7 +56,7 @@ class CarPresenter extends BasePresenter
     {	
 		$this->cars = $this->repository->findBy(array(), array('id' => 'DESC'));
 		$this->topBrands = $this->brandsRepository->findBy(array('top' => true), array('name' => 'ASC'));
-		$this->brands = $this->brandsRepository->findBy(array('top' => false), array('name' => 'ASC'));
+		$this->brands = $this->brandsRepository->findBy(array('top' => false, 'alu' => false), array('name' => 'ASC'));
 		$this->models = $this->modelsRepository->findBy(array(), array('name' => 'ASC'));
 	}
 
