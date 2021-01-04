@@ -121,17 +121,6 @@
   <script>
     // hacks
     $(function() {
-      var carModels = [];
-      
-      $('.js-model[data-brand="2"]').each(function() {
-        carModels.push($(this).text());
-      });
-
-      $.each(carModels, function( index, value ) {
-        $('#frmform-carModel').find('option:contains('+value+')').addClass('is-active');
-      });
-
-
 
       $("#frmform-carBrand").change(function() {
         $('#frmform-carModel option').removeClass('is-active');
