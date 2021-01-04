@@ -103,6 +103,7 @@ class CarPresenter extends BasePresenter
 
         $this->template->idPage = $idPage;
         $this->template->car = $this->car;
+    	$this->template->modelyAut = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarModel')->findAll();
     }
 
     public function actionDelete($id){
