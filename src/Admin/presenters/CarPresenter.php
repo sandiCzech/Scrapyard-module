@@ -129,7 +129,7 @@ class CarPresenter extends BasePresenter
         $form->addText('carName', 'Název')
             ->setRequired('Název je povinný.');
 
-        $brands = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->findAll();
+        $brands = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->findBy(array('alu' => false));
         $brandsForSelect = array();
         if ($brands) {
             foreach ($brands as $brand) {
