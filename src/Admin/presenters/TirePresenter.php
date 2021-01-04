@@ -53,6 +53,8 @@ class TirePresenter extends BasePresenter
 
         $grid->addColumnText('price', 'Cena')->setSortable();
 
+        $grid->addColumnText('tireSize', 'Velikost')->setSortable();
+
         $grid->addColumnText('hide', 'Schovat')->setCustomRender(function($item) {
             if ($item->getHide()) {
                 return 'Ano';
@@ -119,7 +121,7 @@ class TirePresenter extends BasePresenter
         $form->addText('tireName', 'Název')
             ->setRequired('Název je povinný.');
 
-        $brands = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->findAll();
+        $brands = $this->em->getRepository('\WebCMS\ScrapyardModule\Entity\CarBrand')->findBy(array('alu' => true));;
         $brandsForSelect = array();
         if ($brands) {
             foreach ($brands as $brand) {
