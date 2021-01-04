@@ -50,7 +50,7 @@ class TirePresenter extends BasePresenter
 	public function actionDefault($id)
     {	
 		$this->tires = $this->repository->findBy(array(), array('id' => 'DESC'));
-		$this->brands = $this->brandsRepository->findBy(array(), array('name' => 'ASC'));
+		$this->brands = $this->brandsRepository->findBy(array('alu' => true), array('name' => 'ASC'));
 
 		$this->sizes = array(
 			'r13' => 'R13',
